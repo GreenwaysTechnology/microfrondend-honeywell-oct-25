@@ -1,0 +1,18 @@
+services:
+  remote:
+    build:
+      context: ./remote
+    container_name: remote_app
+    ports:
+      - "3001:80"
+    restart: unless-stopped
+
+  host:
+    build:
+      context: ./host
+    container_name: host_app
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    depends_on:
+      - remote
